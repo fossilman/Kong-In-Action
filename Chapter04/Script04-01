@@ -1,0 +1,5 @@
+$ file README.markdown
+README.markdown: UTF-8 Unicode text
+$ md2pod.pl -o READE README.markdown
+$ file READE
+READE: Perl POD document text, UTF-8 Unicode text, with very long lines

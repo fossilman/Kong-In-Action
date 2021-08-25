@@ -1,0 +1,18 @@
+-- 打印0到30之间的素数及素数个数
+offVar = 0
+endVar = 30
+primevar = 0
+for number = offVar,endVar
+ do
+   isPrime = true
+   for i = 2,number-1 do
+     if(number%i == 0)then
+       isPrime =  false
+     else
+       end
+     end
+     if(isPrime)then
+       primevar = primevar + 1
+     print(number.."为素数")
+   end
+ end

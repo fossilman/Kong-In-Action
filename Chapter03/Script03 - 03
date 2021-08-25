@@ -1,0 +1,6 @@
+$ time ./lua.lua
+10000001
+./lua.lua 0.16s user 0.00s system 96% cpu 0.166 total
+$ time ./luajit.lua
+10000001
+./luajit.lua 0.01s user 0.00s system 88% cpu 0.015 total

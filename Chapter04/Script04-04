@@ -1,0 +1,43 @@
+# 搜索
+$ luarocks search pgmoon
+...
+kpgmoon
+   1.8.1-1 （rockspec） - https://luarocks.org
+   1.8.1-1 （src） - https://luarocks.org
+pgmoon
+   1.11.0-1 （rockspec） - https://luarocks.org
+   1.11.0-1 （src） - https://luarocks.org
+   1.10.0-1 （rockspec） - https://luarocks.org
+   1.9.0-1 （rockspec） - https://luarocks.org
+   1.9.0-1 （src） - https://luarocks.org
+   ...
+pgmoon-mashape
+   2.0.1-1 （rockspec） - https://luarocks.org
+   2.0.0-1 （rockspec） - https://luarocks.org
+   1.7.0-1 （rockspec） - https://luarocks.org
+# 安装到指定的tree中
+$ luarocks install pgmoon --tree=~/Desktop/test/
+Installing https://luarocks.org/pgmoon-1.11.0-1.src.rock
+Missing dependencies for pgmoon 1.11.0-1:
+   luabitop （not installed）
+   lpeg （not installed）
+...
+# 安装依赖
+$ luarocks install luabitop --tree=~/Desktop/test/
+Installing https://luarocks.org/luabitop-1.0.1-1.src.rock
+...
+luabitop 1.0.1-1 is now installed in ~/Desktop/test
+$ luarocks install lpeg --tree=~/Desktop/test/
+Installing https://luarocks.org/lpeg-1.0.2-1.src.rock
+...
+lpeg 1.0.2-1 is now installed in ~/Desktop/test
+# 重新安装包
+$ luarocks install pgmoon --tree=~/Desktop/test/
+# 验证
+$ luarocks list --tree=~/Desktop/test/
+lpeg
+   1.0.2-1 （installed） - ~/Desktop/test/lib/luarocks/rocks-5.3
+luabitops
+   1.0.1-1 （installed） - ~/Desktop/test/lib/luarocks/rocks-5.3
+pgmoon
+   1.11.0-1 （installed） - ~/Desktop/test/lib/luarocks/rocks-5.3

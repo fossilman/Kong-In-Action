@@ -1,0 +1,7 @@
+go.sum
+.vscode
+.DS_Store
+template.yml
+*.go.bak
+bootstrap
+.fun

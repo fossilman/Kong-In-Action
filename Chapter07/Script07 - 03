@@ -1,0 +1,4 @@
+{
+    "paths": ["/foo/bar"],
+    "methods": ["GET", "POST"]
+}

@@ -1,0 +1,5 @@
+echo "
+  apiVersion: kuma.io/v1alpha1
+  kind: ..
+  spec: ..
+" | kubectl apply -f -

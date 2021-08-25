@@ -1,0 +1,20 @@
+_format_version: "1.1"
+
+services:
+  - name: service_todolists
+    host: host_todolists
+    routes:
+      - name: route_todolists
+        paths:
+          - /kong
+
+upstreams:
+  - name: host_todolists
+    targets:
+      - target: backend:80
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 3
+      policy: local
+    route: route_todolists

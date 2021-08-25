@@ -1,0 +1,16 @@
+function copy(src, dst)
+   local src_file, err = io.open(src,"r")
+   if not src_file then
+     return false, err
+   end
+   local content = src_file:read("*a")
+   src_file:close()
+   local dst_file, err = io.open(dst, "w")
+   if not dst_file then
+     return false, err
+   end
+   dst_file:write(content)
+   dst_file:close()
+   return true
+end
+copy("lua.lua","lua.bak")

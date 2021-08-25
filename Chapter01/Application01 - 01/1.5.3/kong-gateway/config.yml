@@ -1,0 +1,14 @@
+_format_version: "1.1"
+
+services:
+  - name: service_todolists
+    host: host_todolists
+    routes:
+      - name: route_todolists
+        paths:
+          - /kong/gateway
+
+upstreams:
+  - name: host_todolists
+    targets:
+      - target: backend:80

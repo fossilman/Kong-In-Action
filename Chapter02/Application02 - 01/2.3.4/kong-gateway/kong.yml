@@ -1,0 +1,26 @@
+_format_version: "1.1"
+
+services:
+  - name: service_todolists
+    host: host_todolists
+    routes:
+      - name: route_todolists
+        paths:
+          - /kong
+
+upstreams:
+  - name: host_todolists
+    targets:
+      - target: backend:80
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 3
+      policy: local
+    route: route_todolists
+  - name: ip-restriction
+    config:
+      # 白名单
+      # 该IP地址可以通过命令：docker logs -f kong 查看IP与配置文件中是否相同，如果不同则替换
+      whitelist: ["172.20.0.1"]
+    route: route_todolists

@@ -1,0 +1,23 @@
+# 使用的API版本
+apiVersion: extensions/v1beta1
+# Ingress类型清单
+kind: Ingress
+# 元数据信息
+metadata:
+  # 指定Ingress资源名称
+  name: node
+  # 注解信息
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  # Ingress 资源规则
+  rules:
+  - http:
+    paths:
+    - path: /demo/api
+      # 关联的后端
+      backend:
+        # Service的名称
+        serviceName: node-svc
+        # Service的端口
+        servicePort: 80

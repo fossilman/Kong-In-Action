@@ -1,0 +1,29 @@
+input {
+  http {
+    host => "0.0.0.0"
+    port => 9900
+    additional_codecs => {"application/json"=>"json"}
+    codec => plain {
+      charset=>"GB2312"
+    }
+    threads => 4
+    ssl => false
+    type => "kong_dev"
+    }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{IP:client_id_address} - - \[%{HTTPDAT E:timestamp}\] \"%{WORD:request_method} %{DATA:request} HTTP /%{NUMBER:httpversion}\" %{NUMBER:bytes} %{NUMBER:http_response_time} %{QS:referrer} %{QS:useagent}" }
+  }
+  if ( '@' in [request] ) {
+    drop {}
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["172.19.0.3:9200"]
+    index => "%{type}_%{+YYYY.MM.dd}"
+  }
+}

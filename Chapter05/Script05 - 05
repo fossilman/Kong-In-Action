@@ -1,0 +1,24 @@
+# ---------------------
+# custom_nginx.template
+# ---------------------
+
+worker_processes ${{NGINX_WORKER_PROCESSES}};
+daemon ${{NGINX_DAEMON}};                     
+
+pid pids/nginx.pid;                      
+error_log logs/error.log ${{LOG_LEVEL}}; 
+
+events {
+    use epoll;         
+    multi_accept on;
+}
+
+http {
+
+  resolver ${{DNS_RESOLVER}} ipv6=off;
+  charset UTF-8;
+  error_log logs/error.log ${{LOG_LEVEL}};
+  access_log logs/access.log;
+
+  ... # etc
+}

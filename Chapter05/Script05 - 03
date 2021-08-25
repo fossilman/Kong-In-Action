@@ -1,0 +1,10 @@
+# 查看地址和端口
+$ netstat -lntp
+Active Internet connections （only servers）
+Proto Local Address	State       PID/Program  name
+tcp   0.0.0.0:18443	LISTEN      20947/nginx: master
+tcp   0.0.0.0:18000	LISTEN      20947/nginx: master
+tcp   0.0.0.0:22		LISTEN      2768/sshd
+tcp   127.0.0.1:28444	LISTEN      20947/nginx: master
+tcp   0.0.0.0:28001	LISTEN      20947/nginx: master
+tcp6  :::5432		LISTEN      12873/docker-proxy

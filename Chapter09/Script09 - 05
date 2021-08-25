@@ -1,0 +1,54 @@
+-- handler.lua
+local BasePlugin = require "kong.plugins.base_plugin"
+
+local kong = kong
+
+local function load_credential(key)
+  local credential, err = kong.db.keyauth_credentials:select_by_key(key)
+  if not credential then
+    return nil, err
+  end
+  return credential
+end
+
+local CustomHandler = BasePlugin:extend()
+
+CustomHandler.VERSION  = "1.0.0"
+CustomHandler.PRIORITY = 1010
+
+function CustomHandler:new()
+  CustomHandler.super.new(self, "my-custom-plugin")
+end
+
+function CustomHandler:access(config)
+  CustomHandler.super.access(self)
+  
+  -- 从请求参数中获取apikey字段对应的值
+  local key = kong.request.get_query_arg("apikey")
+
+  local credential_cache_key = kong.db.keyauth_credentials:cache_key(key)
+
+  -- 我们先使用cache.get方法查找apikey是否存储于内存中
+  -- 如果不存在，则在数据库中继续查找
+  -- 如果数据库存在apikey，那么cache.get会自动将值存储在内存中
+  local credential, err = kong.cache:get(credential_cache_key, nil,
+                                         load_credential, credential_cache_key)
+  if err then
+    kong.log.err(err)
+    return kong.response.exit(500, {
+      message = "Unexpected error"
+    })
+  end
+    
+  if not credential then
+    -- 凭证在缓存和数据库中均不存在
+    return kong.response.exit(401, {
+      message = "Invalid authentication credentials"
+    })
+  end
+    
+  -- 当凭证存在时，将凭证信息塞入上游服务请求头中
+  kong.service.request.set_header("X-API-Key", credential.apikey)
+end
+
+return CustomHandler

@@ -1,0 +1,5 @@
+{
+    "hosts": ["example.com", "foo-service.com"],
+    "paths": ["/foo", "/bar"],
+    "methods": ["GET"]
+}

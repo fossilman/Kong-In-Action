@@ -1,0 +1,90 @@
+0 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+1 info using npm@7.20.3
+2 info using node@v16.6.2
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 1ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 4ms
+6 timing config:load:builtin Completed in 5ms
+7 timing config:load:cli Completed in 2ms
+8 timing config:load:env Completed in 1ms
+9 timing config:load:project Completed in 1ms
+10 timing config:load:file:/root/.npmrc Completed in 4ms
+11 timing config:load:user Completed in 4ms
+12 timing config:load:file:/usr/local/etc/npmrc Completed in 4ms
+13 timing config:load:global Completed in 4ms
+14 timing config:load:validate Completed in 0ms
+15 timing config:load:credentials Completed in 2ms
+16 timing config:load:setEnvs Completed in 1ms
+17 timing config:load Completed in 21ms
+18 timing npm:load:configload Completed in 21ms
+19 timing npm:load:setTitle Completed in 0ms
+20 timing npm:load:setupLog Completed in 1ms
+21 timing npm:load:cleanupLog Completed in 3ms
+22 timing npm:load:configScope Completed in 0ms
+23 timing npm:load:projectScope Completed in 1ms
+24 timing npm:load Completed in 27ms
+25 timing config:load:flatten Completed in 130ms
+26 timing arborist:ctor Completed in 1ms
+27 timing arborist:ctor Completed in 0ms
+28 timing idealTree:init Completed in 15ms
+29 timing idealTree:userRequests Completed in 0ms
+30 silly idealTree buildDeps
+31 silly fetch manifest cookie-parser@~1.4.4
+32 http fetch GET 200 https://registry.npmjs.org/cookie-parser 17ms (cache hit)
+33 silly fetch manifest cors@^2.8.5
+34 http fetch GET 200 https://registry.npmjs.org/cors 4ms (cache hit)
+35 silly fetch manifest debug@~2.6.9
+36 http fetch GET 200 https://registry.npmjs.org/debug 3ms (cache hit)
+37 silly fetch manifest express@~4.16.1
+38 http fetch GET 200 https://registry.npmjs.org/express 6ms (cache hit)
+39 silly fetch manifest http-errors@~1.6.3
+40 http fetch GET 200 https://registry.npmjs.org/http-errors 1112ms (cache miss)
+41 silly fetch manifest jade@~1.11.0
+42 http fetch GET 200 https://registry.npmjs.org/jade 629ms (cache miss)
+43 silly fetch manifest mongoose@^5.7.3
+44 http fetch GET 200 https://registry.npmjs.org/mongoose 3239ms (cache miss)
+45 silly fetch manifest morgan@~1.9.1
+46 http fetch GET 200 https://registry.npmjs.org/morgan 292ms (cache miss)
+47 silly fetch manifest eslint@^6.5.1
+48 http fetch GET 200 https://registry.npmjs.org/eslint 7ms (cache hit)
+49 silly fetch manifest eslint-config-airbnb-base@^14.0.0
+50 http fetch GET 200 https://registry.npmjs.org/eslint-config-airbnb-base 5ms (cache hit)
+51 silly fetch manifest eslint-plugin-import@^2.18.2
+52 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-import 4ms (cache hit)
+53 silly fetch manifest eslint-plugin-vue@^5.2.3
+54 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-vue 14ms (cache hit)
+55 silly fetch manifest eslint@^5.0.0
+56 timing idealTree Completed in 5460ms
+57 timing command:install Completed in 5482ms
+58 verbose stack Error: unable to resolve dependency tree
+58 verbose stack     at Arborist.[failPeerConflict] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1266:25)
+58 verbose stack     at Arborist.[loadPeerSet] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1233:34)
+58 verbose stack     at async Arborist.[buildDepStep] (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:867:11)
+58 verbose stack     at async Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:203:7)
+58 verbose stack     at async Promise.all (index 1)
+58 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:141:5)
+58 verbose stack     at async Install.install (/usr/local/lib/node_modules/npm/lib/install.js:150:5)
+59 verbose cwd /root
+60 verbose Linux 3.10.0-1127.19.1.el7.x86_64
+61 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+62 verbose node v16.6.2
+63 verbose npm  v7.20.3
+64 error code ERESOLVE
+65 error ERESOLVE unable to resolve dependency tree
+66 error
+67 error While resolving: node-todo@0.0.0
+67 error Found: eslint@6.8.0
+67 error node_modules/eslint
+67 error   dev eslint@"^6.5.1" from the root project
+67 error
+67 error Could not resolve dependency:
+67 error peer eslint@"^5.0.0" from eslint-plugin-vue@5.2.3
+67 error node_modules/eslint-plugin-vue
+67 error   dev eslint-plugin-vue@"^5.2.3" from the root project
+67 error
+67 error Fix the upstream dependency conflict, or retry
+67 error this command with --force, or --legacy-peer-deps
+67 error to accept an incorrect (and potentially broken) dependency resolution.
+67 error
+67 error See /root/.npm/eresolve-report.txt for a full report.
+68 verbose exit 1

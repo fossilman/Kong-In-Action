@@ -1,0 +1,12 @@
+var ws = new WebSocket('ws://127.0.0.1:8000/'); // 地址为Kong网关代理地址
+// Web Socket 已连接上，使用send()方法发送数据
+ws.onopen = function() {
+// 这里用一个延时器模拟事件
+    setInterval(function() { 
+        ws.send(' 客户端消息 ');
+    },2000);
+}
+// 这里接收服务器端发过来的消息 
+ws.onmessage = function(e) {
+    console.log(e.data) 
+}

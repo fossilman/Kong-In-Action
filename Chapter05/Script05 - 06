@@ -1,0 +1,6 @@
+# my_nginx.conf
+# ...your nginx settings...
+http {
+    include 'nginx-kong.conf';
+    # ...your nginx settings...
+}

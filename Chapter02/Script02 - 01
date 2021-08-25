@@ -1,0 +1,107 @@
+# 以Nginx进程运行的用户
+user nginx;
+# Nginx工作的进程数量，默认自动配置，可配置成CPU数
+worker_processes auto;
+# Nginx的错误日志位置
+error_log /var/log/nginx/error.log;
+# Nginx进程运行后的进程id文件
+pid /run/nginx.pid;
+# 包含模块文件;*.conf表示所有以.conf结尾的文件
+include /usr/share/nginx/modules/*.conf;
+# events块开始
+events {
+# 一个worker进程的最大连接数
+  worker_connections 1024;
+} 	
+# events块结束 
+http {				# http块开始
+# Nginx日志格式
+  log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+		 '$status $body_bytes_sent "$http_referer" '
+		 '"$http_user_agent" "$http_x_forwarded_for"';
+  # Nginx access_log日志文件位置
+  access_log /var/log/nginx/access.log main;
+  # 设置允许以sendfile方式传输文件
+  sendfile on;
+  # 防止网络阻塞
+  tcp_nopush on;
+  # 在TCP协议中，使用Nagle算法，把小包组成大包提高带宽利用率
+  tcp_nodelay on;
+  # 服务端对连接保持的时间，默认是65秒
+  keepalive_timeout 65;
+  # 设置size类型哈希表的最大值
+  types_hash_max_size 2048;
+  # 包含资源类型文件
+  include /etc/nginx/mime.types;
+  # 定义响应的默认MIME类型
+  default_type application/octet-stream;
+  # 引入其他的配置文件，文件名必须以.conf结尾
+  include /etc/nginx/conf.d/*.conf;
+  server {
+    # 监听的端口号，写法一
+    listen 80 default_server;
+    # 监听的端口号，写法二
+    listen [::]:80 default_server;
+    # 对外提供的虚拟主机名称，可以理解为域名;_ 表示无效域名之一，也可以使用 "--" 和 "!@#"
+    server_name _;
+    # 请求的根目录位置
+    root /usr/share/nginx/html;
+    # 注释信息
+
+    # 引入其他的配置文件，文件名必须以 .conf 结尾
+    include /etc/nginx/default.d/*.conf;
+    location / {
+    }
+    # 定义将为指定错误显示的 URI, 返回状态码为 404。一个 URI 值可以包含变量
+    error_page 404 /404.html;
+    location = /40x.html {
+    }
+    # 定义将为指定错误显示的 URI，返回状态码为 500 或者 502、503、504。一个 URI 值可以包含变量
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html;		# location 块开始，精准匹配uri
+    }							# location 块结束
+  }								# server 块结束
+# server块开始
+  server {
+    # 监听端口，ssl表示允许此端口接收的所有连接在SSL模式下工作，http2表示配置端口接收HTTP2连接
+    listen 443 ssl http2 default_server;
+    # 监听端口的另一种写法
+    listen [::]:443 ssl http2 default_server;
+    # 对外提供的虚拟主机名称，可以理解为域名;_表示无效域名之一，也可以使用"--"和"!@#"
+    server_name _;
+    # 请求的根目录位置
+    root /usr/share/nginx/html;
+    # 指定带有PEM格式证书的文件位置
+    ssl_certificate "/etc/pki/nginx/server.crt";
+    # 指定带有PEM格式的密钥文件位置
+    ssl_certificate_key "/etc/pki/nginx/private/server.key";
+    # 设置存储会话参数缓存的类型和大小。Shared表示所有工作进程之间共享的缓存
+    ssl_session_cache shared:SSL:1m;
+    # 指定客户端可以重用会话参数的时间
+    ssl_session_timeout 10m;
+    # 返回客户端支持的密码列表
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    ssl_prefer_server_ciphers on;
+    # 引入其他配置文件，文件名必须以.conf结尾
+    include /etc/nginx/default.d/*.conf;
+
+    # location块开始
+    location / { 
+    # location块结束
+    }
+    # 定义将为指定错误显示的URI
+    error_page 404 /404.html;
+    # location块开始，精准匹配URI
+    location = /40x.html {
+    # location块结束
+    }
+    # 定义将为指定错误显示的URI
+    error_page 500 502 503 504 /50x.html;
+    # location块开始，精准匹配URI
+    location = /50x.html {
+    # location块结束
+    }
+    # server 块结束
+  }
+}

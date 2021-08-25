@@ -1,0 +1,1 @@
+2020/11/17 14:01:21 [warn] 5944#0: *177156638 [lua] balancer.lua:242: callback(): [healthchecks] balancer smsgateway reported health status changed to HEALTHY, context: ngx.timer, client: 192.168.1.10, server: 192.168.1.20:8001

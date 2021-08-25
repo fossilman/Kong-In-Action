@@ -1,0 +1,37 @@
+# 全局配置信息
+global
+  log 127.0.0.1 len 65535 local2 debug
+  uid 200
+  gid 200
+  pidfile /var/run/haproxy.pid
+  daemon
+# 默认配置信息
+defaults
+  log global
+  mode http
+  maxconn 3000
+  option http-server-close
+  option forwardfor
+  option dontlognull
+  timeout connect 5000
+  timeout client 50000
+  timeout server 50000
+# Haproxy监控配置信息
+listen admin_stats
+  bind 10.0.0.1:2408
+  mode http
+  option httplog
+  maxconn 10
+  stats enable
+  stats refresh 30s
+  stats uri /status
+  stats hide-version
+  stats admin if TRUE
+
+# Kong代理配置信息
+listen kong
+  bind 0.0.0.0:1001
+  mode http
+  server kong_nginx-1 10.0.0.2:80 check inter 2000 rise 3 fall 3 weight 1
+  server kong_nginx-2 10.1.0.3:80 check inter 2000 rise 3 fall 3 weight 1
+  server kong_nginx-n x.x.x.x:80  check inter 2000 rise 3 fall 3 weight 1

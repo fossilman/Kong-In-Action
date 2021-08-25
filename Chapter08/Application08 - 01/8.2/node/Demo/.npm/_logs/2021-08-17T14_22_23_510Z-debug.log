@@ -1,0 +1,44 @@
+0 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+1 info using npm@7.20.3
+2 info using node@v16.6.2
+3 timing npm:load:whichnode Completed in 0ms
+4 timing config:load:defaults Completed in 2ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 5ms
+6 timing config:load:builtin Completed in 5ms
+7 timing config:load:cli Completed in 3ms
+8 timing config:load:env Completed in 1ms
+9 timing config:load:project Completed in 2ms
+10 timing config:load:file:/root/.npmrc Completed in 4ms
+11 timing config:load:user Completed in 4ms
+12 timing config:load:file:/usr/local/etc/npmrc Completed in 3ms
+13 timing config:load:global Completed in 3ms
+14 timing config:load:validate Completed in 1ms
+15 timing config:load:credentials Completed in 1ms
+16 timing config:load:setEnvs Completed in 1ms
+17 timing config:load Completed in 23ms
+18 timing npm:load:configload Completed in 23ms
+19 timing npm:load:setTitle Completed in 1ms
+20 timing npm:load:setupLog Completed in 1ms
+21 timing npm:load:cleanupLog Completed in 3ms
+22 timing npm:load:configScope Completed in 0ms
+23 timing npm:load:projectScope Completed in 1ms
+24 timing npm:load Completed in 30ms
+25 timing config:load:flatten Completed in 4ms
+26 timing command:run-script Completed in 46598ms
+27 timing command:start Completed in 46601ms
+28 verbose stack Error: command failed
+28 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/index.js:64:27)
+28 verbose stack     at ChildProcess.emit (node:events:394:28)
+28 verbose stack     at maybeClose (node:internal/child_process:1067:16)
+28 verbose stack     at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)
+29 verbose pkgid node-todo@0.0.0
+30 verbose cwd /root
+31 verbose Linux 3.10.0-1127.19.1.el7.x86_64
+32 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+33 verbose node v16.6.2
+34 verbose npm  v7.20.3
+35 error path /root
+36 error command failed
+37 error signal SIGTERM
+38 error command sh -c node app.js
+39 verbose exit 1

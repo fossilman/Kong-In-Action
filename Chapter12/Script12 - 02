@@ -1,0 +1,22 @@
+# Kong资源组信息 
+upstream kongadmin {
+  # 负载均衡算法
+  least_conn;
+  server 10.0.0.10:8001 weight=1 max_fails=1 fail_timeout=3s;
+  server 10.0.0.11:8001 weight=1 max_fails=1 fail_timeout=3s;
+  server x.x.x.x:8001   weight=1 max_fails=1 fail_timeout=3s;
+} 
+# Nginx代理配置信息
+server {
+  listen 81;
+  server_name _;
+  location / {
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Scheme $scheme;
+    proxy_pass http://kongadmin;
+    # 缓存配置信息
+    expires -1;
+  }
+}

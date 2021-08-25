@@ -1,0 +1,18 @@
+# 添加一个upstream，名称为upstreams_websocket
+$ curl -X POST http://127.0.0.1:8001/upstreams/ \
+    --data "name=upstreams_websocket"
+
+# 为upstream绑定后端websocket_server地址
+$ curl -XPOST http://127.0.0.1:8001/upstreams/upstreams_websocket/targets\
+    --data "target=162.20.10.5:3000" \
+    --data "weight=100"
+
+# 添加一个service，绑定上述名为upstreams_websocket的upstream
+$ curl -X POST http://127.0.0.1:8001/services/ \
+    --data "name=websocket_service" \
+    --data "host=upstreams_websocket"
+
+# 为上述名为websocket_service的service添加路由
+$ curl -X POST http://127.0.0.1:8001/services/websocket_service/routes/ \
+    --data "name=websocket_route" \
+    --data "paths[]=/"

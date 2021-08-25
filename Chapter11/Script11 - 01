@@ -1,0 +1,25 @@
+input {
+  http {
+    host => "0.0.0.0"
+    port => 9900
+    additional_codecs => {"application/json"=>"json"}
+    codec => plain {
+      charset=>"GB2312"
+    }
+    threads => 4
+    ssl => false
+    type => "kong_dev"
+    }
+}
+
+output {
+  elasticsearch {
+    hosts => ["172.19.0.3:9200"]
+    index => "%{type}_%{+YYYY.MM.dd}"
+  }
+  file {
+    path => "/tmp/%{type}.gzip"
+    codec => line { format => "custom format: %{message}"}
+    gzip => true
+  }
+}

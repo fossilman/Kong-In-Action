@@ -1,0 +1,5 @@
+export PATH=/opt/tool/stapxx:/opt/tool/FlameGraph:/opt/tool/openresty-systemtap-toolkit:$PATH
+pid=$(ps aux|grep 'nginx'|grep 'worker'|awk '{print $2}')
+./stapxx/samples/lj-lua-stacks.sxx --arg time=5 --skip-badvars -x $pid > a.bt
+./FlameGraph/stackcollapse-stap.pl a.bt > a.cbt
+./FlameGraph/flamegraph.pl --encoding="ISO-8859-1" --title="Whitelist Interface ON CPU FlameGraph" a.cbt > a.svg

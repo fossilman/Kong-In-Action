@@ -1,0 +1,13 @@
+function copy(src, dst)
+   local src_file = io.input(src)
+   if not src_file then
+     print(src.."不存在")
+     return
+   end
+   local str = io.read("*a")
+   local dst_file = io.output(dst)
+   io.write(str)
+   io.flush()
+   io.close()
+end
+copy("lua.lua","lua.bak")

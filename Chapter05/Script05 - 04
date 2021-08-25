@@ -1,0 +1,6 @@
+# 日志文件位置
+$ tree /usr/local/kong/logs/example
+/usr/local/kong/logs/example
+├── access.log
+├── admin_access.log
+└── error.log

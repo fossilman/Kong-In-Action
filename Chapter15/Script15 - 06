@@ -1,0 +1,13 @@
+type: TrafficLog
+mesh: default
+name: web-to-backend-policy
+sources:
+  - match:
+      kuma.io/service: web
+      cloud:   aws
+      region:  us
+destinations:
+  - match:
+      kuma.io/service: backend
+conf:
+  backend: splunk

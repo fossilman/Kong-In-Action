@@ -1,0 +1,6 @@
+location ^~ /foo/bar {
+    if ($request_method !~ ^(GET|POST)$ ) {
+        return 501;
+    }
+    ...
+}

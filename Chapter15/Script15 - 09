@@ -1,0 +1,65 @@
+# 使用的版本
+apiVersion: v1
+# namespace资源清单
+kind: Namespace
+# 元数据信息
+metadata:
+  name: kuma-node
+  namespace: kuma-node
+  # 注解信息
+  annotations:
+    # Sidecar自动注入
+    kuma.io/sidecar-injection: enabled
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # 注解信息
+  annotations:
+    kuma.io/service: node
+  # 指定Service资源名称
+  name: node-mesh-svc
+  # 指定Service资源命名空间
+  namespace: kuma-node
+spec:
+  selector:
+    language: node
+    sort: backend
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # 注解信息
+  annotations:
+    kuma.io/service: node
+  # 指定Deployment资源名称
+  name: node-mesh-deploy
+  # 指定Deployment资源命名空间
+  namespace: kuma-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      language: node
+      sort: backend
+  template:
+    metadata:
+      labels:
+        language: node
+        sort: backend
+    spec:
+      containers:
+      - name: node
+        image: 15056332824/node:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "100m"

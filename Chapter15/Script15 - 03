@@ -1,0 +1,4 @@
+echo "
+  type: ..
+  spec: ..
+" | kumactl apply -f -

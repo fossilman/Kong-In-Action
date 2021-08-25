@@ -1,0 +1,15 @@
+# 使用的API版本
+apiVersion: configuration.konghq.com/v1
+# KongPlugin资源清单
+kind: KongPlugin
+# 元数据信息
+metadata:
+# KongPlugin资源的名称
+  name: rl-by-ip
+# 插件的配置信息
+config:
+  minute: 5
+  limit_by: ip
+  policy: local
+# 插件的名称
+plugin: rate-limiting

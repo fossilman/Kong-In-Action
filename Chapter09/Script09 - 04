@@ -1,0 +1,5 @@
+-- Core DAOs
+local services_dao = kong.db.services
+local routes_dao = kong.db.routes
+local consumers_dao = kong.db.consumers
+local plugins_dao = kong.dao.plugins

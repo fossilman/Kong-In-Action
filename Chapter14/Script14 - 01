@@ -1,0 +1,55 @@
+# 使用的版本
+apiVersion: v1
+# Service对象资源清单
+kind: Service
+# 元数据信息
+metadata:
+  # 指定 Service 资源名称
+  name: node-svc
+spec:
+  # 标签选择器与 Deployment 资源关联
+  selector:
+    language: node
+    sort: backend
+  # 端口映射，容器外端口号为 80，容器内端口号为 8080
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+
+---
+# 使用的API版本
+apiVersion: apps/v1
+# Deployment资源清单
+kind: Deployment
+metadata:
+  # 元数据信息，指定Deployment资源名称与命名空间
+  name: node-deploy
+  namespace: default
+spec:
+  # Pod 副本数量
+  replicas: 1
+  # 标签选择器与 Pod 资源关联
+  selector:
+    matchLabels:
+      language: node
+      sort: backend
+  template:
+    # Pod模板元信息
+    metadata:
+      labels:
+        language: node
+        sort: backend
+    spec:
+      # 启动容器时加载的镜像和启动端口
+      containers:
+      - name: node
+        image: kong-in-action:latest
+        ports:
+        - containerPort: 8080
+        # 容器CPU限制
+        resources:
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 100m

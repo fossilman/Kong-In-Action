@@ -1,0 +1,27 @@
+server {
+    listen 80;
+    server_name _;
+    location /mixed {
+        set_by_lua_block $variable {
+            ngx.log（ngx.ERR, "set_by_lua*"）
+        }
+        access_by_lua_block {
+            ngx.log（ngx.ERR, "rewrite_by_lua*"）
+        }
+        rewrite_by_lua_block {
+            ngx.log（ngx.ERR, "access_by_lua*"）
+        }
+        content_by_lua_block {
+            ngx.log（ngx.ERR, "content_by_lua*"）
+        }
+        body_filter_by_lua_block {
+            ngx.log（ngx.ERR, "header_filter_by_lua*"）
+        }
+        header_filter_by_lua_block {
+            ngx.log（ngx.ERR, "body_filter_by_lua*"）
+        }
+        log_by_lua_block {
+            ngx.log（ngx.ERR, "log_by_lua*"）
+        }
+    }
+}

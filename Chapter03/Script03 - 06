@@ -1,0 +1,14 @@
+a = 100  --> 定义变量
+if(a == 10)  --> 检查布尔条件
+  then
+    print("a的值为10")
+elseif(a == 20)  --> 检查布尔条件
+  then
+    print("a的值为20")
+elseif(a == 30)  --> 检查布尔条件
+  then
+    print("a的值为30")
+else  --> 检查布尔条件
+  print("没有匹配a的值")
+end
+print("a的真实值为: ", a)

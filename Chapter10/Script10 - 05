@@ -1,0 +1,6 @@
+2020/10/19 17:26:37 [notice] 10074#0: signal 15 (SIGTERM) received from 10112, exiting
+2020/10/19 17:26:37 [notice] 10075#0: exiting
+2020/10/19 17:26:37 [notice] 10075#0: exit
+2020/10/19 17:26:37 [notice] 10074#0: signal 17 (SIGCHLD) received from 10075
+2020/10/19 17:26:37 [notice] 10074#0: worker process 10075 exited with code 0
+2020/10/19 17:26:37 [notice] 10074#0: exit

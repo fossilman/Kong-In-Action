@@ -1,0 +1,17 @@
+
+prefix = /usr/local/kong/  
+log_level = notice  
+proxy_access_log = logs/example/access.log  
+proxy_error_log = logs/example/error.log  
+admin_access_log = logs/example/admin_access.log  
+admin_error_log = logs/example/error.log  
+proxy_listen = 0.0.0.0:18000 http2 , 0.0.0.0:18443 http2 ssl 
+admin_listen = 0.0.0.0:28001, 127.0.0.1:28444 ssl  
+database = postgres
+pg_host = 127.0.0.1 
+pg_port = 5432
+pg_timeout = 5000  
+pg_user = kong  
+pg_password = kong  
+pg_database = kong  
+lua_socket_pool_size = 30

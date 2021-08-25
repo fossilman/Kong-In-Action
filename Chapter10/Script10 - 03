@@ -1,0 +1,2 @@
+127.0.0.1 - - [17/Nov/2020:09:51:20 +0800] "GET /status HTTP/1.1" 200 1182"-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
+127.0.0.1 - - [17/Nov/2020:09:57:52 +0800] "GET /endpoints HTTP/1.1" 200 3659 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"

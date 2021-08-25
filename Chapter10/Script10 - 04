@@ -1,0 +1,10 @@
+2020/10/19 16:54:48 [notice] 6533#0: openresty/1.15.8.3
+2020/10/19 16:54:48 [notice] 6533#0: built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC)
+2020/10/19 16:54:48 [notice] 6533#0: OS: Linux 3.10.0-957.21.3.el7.x86_64
+2020/10/19 16:54:48 [notice] 6533#0: getrlimit(RLIMIT_NOFILE): 65535:65535
+2020/10/19 16:54:48 [notice] 6545#0: start worker processes
+2020/10/19 16:54:48 [notice] 6545#0: start worker process 6546
+2020/10/19 16:54:48 [notice] 6546#0: *1 [lua] cache_warmup.lua:46: cache_warmup_single_entity(): Preloading 'services' into the core_cache..., context: init_worker_by_lua*
+2020/10/19 16:54:48 [notice] 6546#0: *1 [lua] cache_warmup.lua:85: cache_warmup_single_entity(): finished preloading 'services' into the core_cache (in 0ms), context: init_worker_by_lua*
+2020/10/19 16:54:48 [notice] 6546#0: *1 [lua] cache_warmup.lua:46: cache_warmup_single_entity(): Preloading 'plugins' into the core_cache..., context: init_worker_by_lua*
+2020/10/19 16:54:48 [notice] 6546#0: *1 [lua] cache_warmup.lua:85: cache_warmup_single_entity(): finished preloading 'plugins' into the core_cache (in 0ms), context: init_worker_by_lua*

@@ -1,0 +1,24 @@
+[
+    {
+        "paths": ["/status/\d+"],
+        "regex_priority": 3
+    },
+    {
+        "paths": ["/status/\d+/version/\d+"],
+        "regex_priority": 0
+    },
+    {
+        "paths": ["/status/\d+/version/\d+/status/\d+"],
+        "regex_priority": 0
+    },
+    {
+        "paths": ["/version/\d+/status/\d+"],
+        "regex_priority": 6
+    },
+    {
+        "paths": ["/version"],
+    },
+    {
+        "paths": ["/version/any"],
+    }
+]

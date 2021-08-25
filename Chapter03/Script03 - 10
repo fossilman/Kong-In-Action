@@ -1,0 +1,11 @@
+-- 打印区间[0,5]内的数字
+a = 0
+while(a < 10) 
+ do
+  print("a的值为:", a)
+  a=a+1
+  if(a > 5)
+  then
+    break  --> 使用 break 语句终止循环
+  end
+end

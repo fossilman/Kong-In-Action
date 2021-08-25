@@ -1,0 +1,29 @@
+version: "3"
+services:
+  go:
+    container_name: go
+    build: ./go
+    ports: ['8080:8080']
+    volumes:
+      - ./go/Demo:/root
+    command: /bin/bash -c "./demo" 
+    networks:
+      elk:
+        ipv4_address: 172.19.0.8
+
+  node:
+    container_name: node
+    build: ./node
+    ports: ['8081:8080']
+    volumes:
+      - ./node/Demo/:/root/
+    command: /bin/bash -c "npm install && npm start"
+    networks:
+      elk:
+        ipv4_address: 172.19.0.9
+
+networks:
+  elk:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24

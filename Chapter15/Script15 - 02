@@ -1,0 +1,11 @@
+sources:
+- match:
+  kuma.io/service: web
+  cloud:   aws
+  region:  us
+destinations:
+- match:
+  kuma.io/service: backend
+  version: v2      
+conf:
+  ...

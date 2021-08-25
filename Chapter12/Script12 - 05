@@ -1,0 +1,8 @@
+#!/bin/bash
+# 统计haproxy进程个数
+count = `ps -ef | grep [h]aproxy | wc -l`
+if [ $count > 0 ]; then
+  exit 0
+else
+  exit 1
+fi

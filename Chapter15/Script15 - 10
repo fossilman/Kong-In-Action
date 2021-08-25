@@ -1,0 +1,19 @@
+
+# 使用的API版本
+apiVersion: kuma.io/v1alpha1
+# TrafficPermission资源类型清单
+kind: TrafficPermission
+# 应用的网格
+mesh: node
+# 元数据信息
+metadata:
+  namespace: kuma-node
+  name: all-traffic-allowed
+# 允许请求的来源信息与目标信息
+spec:
+  sources:
+    - match:
+      kuma.io/service: '*'
+  destinations:
+    - match:
+      kuma.io/service: '*'

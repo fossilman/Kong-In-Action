@@ -1,0 +1,20 @@
+# 搜索
+$ opm search pgmoon
+gnois/losty			Web framework in Luaty on OpenResty
+xiangnanscu/pgmoon		A PostgreSQL client library written in pure 
+				Lua （MoonScript）
+xiangnanscu/lua-resty-query	convenient wrapper for lua-resty-mysql or 
+				pgmoon
+leafo/pgmoon                       A PostgreSQL client library written in pure 
+				Lua （MoonScript）
+agentzh/pgmoon                    A PostgreSQL client library written in pure 
+				Lua （MoonScript）
+# 选择、安装
+$ opm install agentzh/pgmoon
+# 验证
+$ opm list
+agentzh/pgmoon                    1.6.0
+# 更新版本
+$ opm upgrade agentzh/pgmoon
+* Fetching agentzh/pgmoon > 1.6.0
+Package agentzh/pgmoon 1.6.0 is already the latest version.

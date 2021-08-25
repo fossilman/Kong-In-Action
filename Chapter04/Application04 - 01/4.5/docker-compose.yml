@@ -1,0 +1,32 @@
+version: "3"
+services:
+  postgres:
+    container_name: postgres
+    build:
+      context: ./postgres
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    ports: ['5432:5432']
+    networks:
+      extnetwork:
+        ipv4_address: 172.19.96.2
+  openresty:
+    container_name: openresty
+    build: 
+      context: ./openresty
+    depends_on:
+      - postgres
+    ports: ['80:80']
+    volumes:
+      - ./openresty/lua:/opt/openresty/nginx/lua
+    networks:
+      extnetwork:
+        ipv4_address: 172.19.96.3
+    command: /bin/bash -c "pwd && psql postgres://kong:kong@172.19.96.2:5432/kong -f /init.sql && openresty -c conf/nginx.version1.conf && tail -f /etc/hosts"
+networks:
+  extnetwork:
+    ipam:
+      config:
+        - subnet: 172.19.96.0/16

@@ -1,0 +1,11 @@
+type: TrafficLog
+mesh: default
+name: catch-all-policy
+sources:
+  - match:
+    kuma.io/service: '*'
+destinations:
+  - match:
+    kuma.io/service: '*'
+conf:
+  backend: logstash

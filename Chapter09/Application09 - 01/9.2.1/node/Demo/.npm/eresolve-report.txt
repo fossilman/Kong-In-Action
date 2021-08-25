@@ -1,0 +1,81 @@
+# npm resolution error report
+
+2021-08-18T14:07:16.570Z
+
+While resolving: node-todo@0.0.0
+Found: eslint@6.8.0
+node_modules/eslint
+  dev eslint@"^6.5.1" from the root project
+
+Could not resolve dependency:
+peer eslint@"^5.0.0" from eslint-plugin-vue@5.2.3
+node_modules/eslint-plugin-vue
+  dev eslint-plugin-vue@"^5.2.3" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force, or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
+
+Raw JSON explanation object:
+
+{
+  "code": "ERESOLVE",
+  "current": {
+    "name": "eslint",
+    "version": "6.8.0",
+    "whileInstalling": {
+      "name": "node-todo",
+      "version": "0.0.0",
+      "path": "/root"
+    },
+    "location": "node_modules/eslint",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "dev",
+        "name": "eslint",
+        "spec": "^6.5.1",
+        "from": {
+          "location": "/root"
+        }
+      }
+    ]
+  },
+  "currentEdge": {
+    "type": "dev",
+    "name": "eslint",
+    "spec": "^6.5.1",
+    "from": {
+      "location": "/root"
+    }
+  },
+  "edge": {
+    "type": "peer",
+    "name": "eslint",
+    "spec": "^5.0.0",
+    "error": "INVALID",
+    "from": {
+      "name": "eslint-plugin-vue",
+      "version": "5.2.3",
+      "whileInstalling": {
+        "name": "node-todo",
+        "version": "0.0.0",
+        "path": "/root"
+      },
+      "location": "node_modules/eslint-plugin-vue",
+      "isWorkspace": false,
+      "dependents": [
+        {
+          "type": "dev",
+          "name": "eslint-plugin-vue",
+          "spec": "^5.2.3",
+          "from": {
+            "location": "/root"
+          }
+        }
+      ]
+    }
+  },
+  "strictPeerDeps": false,
+  "force": false
+}

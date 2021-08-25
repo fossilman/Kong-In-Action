@@ -1,0 +1,41 @@
+version: "3"
+services:
+  postgres:
+    container_name: postgres
+    build:
+      context: ./postgres
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    ports: ['5432:5432']
+    networks:
+      kong:
+        ipv4_address: 162.20.10.2
+
+  kong:
+    container_name: kong
+    build: ./kong
+    environment: 
+      KONG_PG_HOST: "162.20.10.2"
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+    ports: ['8001:8001','8000:8000']
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    restart: on-failure:5
+    volumes:
+      - ./kong:/etc/kong/
+    command: /bin/bash -c "kong migrations bootstrap && kong start -c /etc/kong/kong.conf.default"
+    networks:
+      kong:
+        ipv4_address: 162.20.10.4
+    
+networks:
+  kong:
+    ipam:
+      config:
+        - subnet: 162.20.10.0/16

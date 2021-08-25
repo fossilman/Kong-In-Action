@@ -1,0 +1,8 @@
+# 使用的版本
+apiVersion: kuma.io/v1alpha1
+# Mesh类型清单
+kind: Mesh
+# 元数据信息
+metadata:
+# 网格的名称
+  name: node

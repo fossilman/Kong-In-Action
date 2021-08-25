@@ -1,0 +1,34 @@
+# 全局配置信息 
+global_defs {
+  notification_email {
+    sysadmin@qq.com
+  }
+  notification_email_from Alexandre.Cassen@firewall.loc
+  router_id proxy1
+}
+# 服务脚本配置信息
+vrrp_script chk_nginx {
+  script "/etc/keepalived/check.sh"
+  interval 2
+  weight 20
+  fall 3
+  rise 2
+}
+# Master配置信息
+vrrp_instance VI_1 {
+  state MASTER
+  interface ens33
+  virtual_router_id 51
+  priority 100
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass 1111
+  }
+  virtual_ipaddress {
+    172.19.1.200
+  }
+  track_script {
+    checkproxy
+  }
+}
