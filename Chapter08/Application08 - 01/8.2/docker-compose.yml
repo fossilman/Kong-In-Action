@@ -37,10 +37,13 @@ services:
   go:
     container_name: go
     build: ./go
+    environment:
+      GO111MODULE: "on"
+      GOPROXY: "https://goproxy.cn"
     ports: ['8080:8080']
     volumes:
       - ./go/Demo:/root
-    command: /bin/bash -c "./demo" 
+    command: /bin/bash -c "go build -o demo && ./demo" 
     networks:
       demo:
         ipv4_address: 62.20.10.5

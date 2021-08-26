@@ -1,5 +1,0 @@
-node_modules
-.gitignore
-webpack.config.js
-.eslintrc.json
-Dockerfile

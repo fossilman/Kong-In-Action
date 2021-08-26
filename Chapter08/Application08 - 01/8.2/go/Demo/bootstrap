@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+export PORT=8080
+export GIN_MODE=release
+./demo
