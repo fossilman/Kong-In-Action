@@ -1,0 +1,43 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  serverless_express: # service name
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: This is FC service
+      Policies:
+        - AliyunECSNetworkInterfaceManagementAccess
+      VpcConfig:
+        VpcId: vpc-j6ck0lnn7a1c21wji3acw
+        VSwitchIds:
+          - vsw-j6cjvejs94k5ijdziupxp
+        SecurityGroupId: sg-j6ccqyamxml07soet3to
+      InternetAccess: true
+    serverless_express: # function name
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        Runtime: nodejs12
+        CodeUri: ./
+        MemorySize: 1024
+        InstanceConcurrency: 5
+        Timeout: 60
+      Events:
+        defaultTrigger:
+          Type: HTTP
+          Properties:
+            AuthType: anonymous
+            Methods:
+              - GET
+              - POST
+  Domain:
+    Type: Aliyun::Serverless::CustomDomain
+    Properties:
+      DomainName: Auto
+      Protocol: HTTP
+      RouteConfig:
+        Routes:
+          "/*":
+            ServiceName: serverless_express
+            FunctionName: serverless_express
+  
