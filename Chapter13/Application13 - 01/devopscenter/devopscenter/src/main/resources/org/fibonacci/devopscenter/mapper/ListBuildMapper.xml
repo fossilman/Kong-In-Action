@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.devopscenter.mapper.ListBuildMapper">
+    <resultMap id="BaseResultMap" type="org.fibonacci.devopscenter.domain.ListBuild">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="list_id" jdbcType="BIGINT" property="listId"/>
+        <result column="gitlab_id" jdbcType="INTEGER" property="gitlabId"/>
+        <result column="gitlab_version" jdbcType="VARCHAR" property="gitlabVersion"/>
+        <result column="gitlab_head" jdbcType="VARCHAR" property="gitlabHead"/>
+        <result column="gitlab_desc" jdbcType="VARCHAR" property="gitlabDesc"/>
+        <result column="push_author" jdbcType="VARCHAR" property="pushAuthor"/>
+        <result column="build_status" jdbcType="VARCHAR" property="buildStatus"/>
+        <result column="jenkins_id" jdbcType="INTEGER" property="jenkinsId"/>
+        <result column="harbor_key" jdbcType="VARCHAR" property="harborKey"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="gitlab_time" jdbcType="TIMESTAMP" property="gitlabTime"/>
+        <result column="fail_reason" jdbcType="VARCHAR" property="failReason" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, list_id, gitlab_id, gitlab_version, gitlab_head, gitlab_desc, push_author, build_status,
+    jenkins_id, remark, gitlab_time, create_by,update_by,create_time, update_time,fail_reason,harbor_key
+  </sql>
+    <sql id="List_Column_List">
+    id, list_id, gitlab_id, gitlab_version, gitlab_head, gitlab_desc, push_author, build_status,
+    jenkins_id,create_by,update_by,create_time,update_time,fail_reason,harbor_key,remark
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pb_list_build
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectBylistid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pb_list_build
+        where list_id = #{listid,jdbcType=BIGINT} order by create_time desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pb_list_build
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByListid" parameterType="java.lang.Long">
+    delete from pb_list_build
+    where list_id = #{listid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="org.fibonacci.devopscenter.domain.ListBuild" useGeneratedKeys="true" keyProperty="id">
+    insert into pb_list_build (id, list_id, gitlab_id,
+      gitlab_version, gitlab_head, gitlab_desc,
+      push_author, build_status, jenkins_id,
+      remark, gitlab_time,
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{listId,jdbcType=BIGINT}, #{gitlabId,jdbcType=INTEGER},
+      #{gitlabVersion,jdbcType=VARCHAR}, #{gitlabHead,jdbcType=VARCHAR}, #{gitlabDesc,jdbcType=VARCHAR},
+      #{pushAuthor,jdbcType=VARCHAR}, #{buildStatus,jdbcType=VARCHAR}, #{jenkinsId,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{gitlabTime,jdbcType=TIMESTAMP},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="org.fibonacci.devopscenter.domain.ListBuild" useGeneratedKeys="true" keyProperty="id">
+        insert into pb_list_build
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="listId != null">
+                list_id,
+            </if>
+            <if test="gitlabId != null">
+                gitlab_id,
+            </if>
+            <if test="gitlabVersion != null">
+                gitlab_version,
+            </if>
+            <if test="gitlabHead != null">
+                gitlab_head,
+            </if>
+            <if test="gitlabDesc != null">
+                gitlab_desc,
+            </if>
+            <if test="pushAuthor != null">
+                push_author,
+            </if>
+            <if test="buildStatus != null">
+                build_status,
+            </if>
+            <if test="jenkinsId != null">
+                jenkins_id,
+            </if>
+            <if test="harborKey != null">
+                harbor_key,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="gitlabTime != null">
+                gitlab_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="listId != null">
+                #{listId,jdbcType=BIGINT},
+            </if>
+            <if test="gitlabId != null">
+                #{gitlabId,jdbcType=INTEGER},
+            </if>
+            <if test="gitlabVersion != null">
+                #{gitlabVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabHead != null">
+                #{gitlabHead,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabDesc != null">
+                #{gitlabDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="pushAuthor != null">
+                #{pushAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="buildStatus != null">
+                #{buildStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="jenkinsId != null">
+                #{jenkinsId,jdbcType=INTEGER},
+            </if>
+            <if test="harborKey != null">
+                #{harborKey,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabTime != null">
+                #{gitlabTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.devopscenter.domain.ListBuild">
+        update pb_list_build
+        <set>
+            <if test="listId != null">
+                list_id = #{listId,jdbcType=BIGINT},
+            </if>
+            <if test="gitlabId != null">
+                gitlab_id = #{gitlabId,jdbcType=INTEGER},
+            </if>
+            <if test="gitlabVersion != null">
+                gitlab_version = #{gitlabVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabHead != null">
+                gitlab_head = #{gitlabHead,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabDesc != null">
+                gitlab_desc = #{gitlabDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="pushAuthor != null">
+                push_author = #{pushAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="buildStatus != null">
+                build_status = #{buildStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="jenkinsId != null">
+                jenkins_id = #{jenkinsId,jdbcType=INTEGER},
+            </if>
+
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="gitlabTime != null">
+                gitlab_time = #{gitlabTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failReason != null">
+                fail_reason = #{failReason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.fibonacci.devopscenter.domain.ListBuild">
+    update pb_list_build
+    set list_id = #{listId,jdbcType=BIGINT},
+      gitlab_id = #{gitlabId,jdbcType=INTEGER},
+      gitlab_version = #{gitlabVersion,jdbcType=VARCHAR},
+      gitlab_head = #{gitlabHead,jdbcType=VARCHAR},
+      gitlab_desc = #{gitlabDesc,jdbcType=VARCHAR},
+      push_author = #{pushAuthor,jdbcType=VARCHAR},
+      build_status = #{buildStatus,jdbcType=VARCHAR},
+      jenkins_id = #{jenkinsId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      gitlab_time = #{gitlabTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByListidAndVersion" resultMap="BaseResultMap">
+        select
+        <include refid="List_Column_List"/>
+        from pb_list_build
+        where list_id = #{listid,jdbcType=BIGINT}
+                and gitlab_version=#{gitlabVersion,jdbcType=VARCHAR} order by create_time desc limit 1
+    </select>
+
+    <select id="selectByListid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="List_Column_List"/>
+        from pb_list_build
+        where list_id = #{listid,jdbcType=BIGINT}
+        order by update_time desc
+    </select>
+
+    <select id="selectBylistIdArrays" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="List_Column_List"/>
+        from pb_list_build
+        where list_id in
+        <foreach collection="listidList" index="index" item="listid"
+                 open="(" separator="," close=")">
+            #{listid}
+        </foreach>
+        order by create_time desc
+    </select>
+    <select id="selectByAll" resultMap="BaseResultMap">
+        select
+        <include refid="List_Column_List"/>
+        from pb_list_build
+        where build_status ='ING'
+    </select>
+
+    <select id="selectByBuildStatus" resultType="java.lang.Long">
+    select
+    id
+    from pb_list_build
+    where build_status ='ING'
+  </select>
+
+    <select id="selectByHarborKey" resultMap="BaseResultMap">
+    select
+    <include refid="List_Column_List"/>
+    from pb_list_build
+    where harbor_key =#{harborkey,jdbcType=VARCHAR} limit 1
+  </select>
+
+    <select id="selectByHarborArray" resultMap="BaseResultMap">
+        select
+        <include refid="List_Column_List"/>
+        from pb_list_build
+        where harbor_key in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+        order by create_time desc
+    </select>
+</mapper>

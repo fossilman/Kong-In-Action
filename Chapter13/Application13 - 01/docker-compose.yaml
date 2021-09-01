@@ -1,0 +1,157 @@
+version: "3"
+services:
+  eureka:
+    image: konginaction/eureka:latest
+    container_name: konginaction_eureka
+    restart: always
+    environment:
+      SERVER_PORT: 7777
+      EUREKA_INSTANCE_HOSTNAME: "192.168.100.10"
+      JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.10
+  mysql:
+    image: konginaction/mysql:5.7
+    container_name: konginaction_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456'
+    ports:
+      - '3306:3306'
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.11
+  devopscenter:
+    depends_on:
+      - eureka
+      - mysql
+      - gitlab
+      - jenkins
+      # - harbor
+    image: konginaction/devopscenter:latest
+    container_name: konginaction_devopscenter
+    restart: always
+    environment:
+      SERVER_PORT: 8080
+      EUREKA_INSTENCE_PORT: 7777
+      EUREKA_INSTANCE_HOSTNAME: eureka
+      DB_HOST: mysql:3306
+      DB_NAME: root
+      DB_PASSWORD: 123456
+      GITLAB_URL: gitlab
+      GITLAB_TOKEN: "xxxxxxxxxx"
+      KONG_URL: http://kong:8001
+      JENKINS_URL: jenkins
+      JENKINS_USERNAME: admin
+      JENKINS_PASSWORD: admin123
+      # 为了演示该项目，此Harbor地址为官网Demo仓库，用户可修改为自建Harbor即可
+      HARBOR_URL: https://demo.goharbor.io/
+      HARBOR_USERNAME: konginaction
+      HARBOR_PASSWORD: 1qaz@WSX
+      JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.12
+  routeplus:
+    depends_on:
+      - eureka
+      - mysql
+      - kong
+    image: konginaction/routeplus:latest
+    container_name: konginaction_routeplus
+    restart: always
+    environment:
+      SERVER_PORT: 8080
+      EUREKA_INSTENCE_PORT: 7777
+      EUREKA_INSTANCE_HOSTNAME: eureka
+      DB_HOST: mysql:3306
+      DB_NAME: root
+      DB_PASSWORD: 123456
+      KONG_URL: kong:8001
+      JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.13
+  postgres:
+    image: postgres:9.6
+    container_name: konginaction_postgres
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    ports:
+      - '5432:5432'
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.14
+  kong:
+    depends_on:
+      - postgres
+    image: kong:2.0.5
+    container_name: konginaction_kong
+    environment:
+      KONG_PG_HOST: postgres
+      KONG_DATABASE: "postgres"
+      KONG_PG_PASSWORD: kong
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+    ports:
+      - '8000:8000'
+      - '8443:8443'
+      - '8001:8001'
+      - '8444:8444'
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    restart: on-failure:5
+    command: /bin/bash -c "kong migrations bootstrap && kong start -c /etc/kong/kong.conf.default"
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.15
+  devopscenter_web:
+    image: konginaction/devopscenter_web:local
+    container_name: konginaction_devopscenter_web
+    restart: always
+    ports:
+      - '80:80'
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.16
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: konginaction_gitlab
+    ports:
+      - '88:80'
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.17
+  jenkins:
+    image: jenkinsci/blueocean
+    container_name: konginaction_jenkins
+    ports:
+      - '8888:8080'
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.18
+  initialization:
+    depends_on: 
+      - kong
+    image: konginaction/initialization:latest
+    container_name: konginaction_initialization
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      konginaction_network:
+        ipv4_address: 192.168.100.20
+networks:
+  konginaction_network:
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24

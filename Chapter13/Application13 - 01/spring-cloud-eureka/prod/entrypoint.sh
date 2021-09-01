@@ -1,0 +1,1 @@
+java `echo ${JVM_OPTION}` -jar ./spring-cloud-eureka-9.0.0-SNAPSHOT.jar

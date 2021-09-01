@@ -1,0 +1,110 @@
+<configuration>
+
+    <!-- property -->
+    <property resource="application.properties"/>
+
+    <springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="default"/>
+    <property name="LOG_HOME" value="/data/logs"/>
+
+    <springProfile name="local">
+        <appender name="STDOUT_LOCAL" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>local - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT_LOCAL"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <appender name="FILE_DEV" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/${APP_NAME}.log.dev.%d{yyyy-MM-dd}</fileNamePattern>
+            </rollingPolicy>
+            <encoder>
+                <pattern>develop - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+        <appender name="LOGSTASH_DEV" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <param name="Encoding" value="UTF-8"/>
+            <remoteHost>logstash.dev.loopin.group</remoteHost>
+            <port>4567</port>
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="FILE_DEV"/>
+            <appender-ref ref="LOGSTASH_DEV"/>
+        </root>
+    </springProfile>
+    <springProfile name="sit">
+        <appender name="FILE_SIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/${APP_NAME}.log.sit.%d{yyyy-MM-dd}</fileNamePattern>
+            </rollingPolicy>
+            <encoder>
+                <pattern>sit - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+        <appender name="LOGSTASH_SIT" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <param name="Encoding" value="UTF-8"/>
+            <remoteHost>logstash.sit.loopin.group</remoteHost>
+            <port>4567</port>
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="FILE_SIT"/>
+            <appender-ref ref="LOGSTASH_SIT"/>
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <appender name="FILE_PROD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/${APP_NAME}.log.prod.%d{yyyy-MM-dd}</fileNamePattern>
+            </rollingPolicy>
+            <encoder>
+                <pattern>prod - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+        <appender name="LOGSTASH_PROD" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <param name="Encoding" value="UTF-8"/>
+            <remoteHost>logstash.prod.loopin.group</remoteHost>
+            <port>4567</port>
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="FILE_PROD"/>
+            <appender-ref ref="LOGSTASH_PROD"/>
+        </root>
+    </springProfile>
+
+    <!-- 测试、生产环境不在控制台打印日志（备用） -->
+    <!--<appender name="STDOUT_DEV" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!--<encoder>-->
+    <!--<pattern>develop - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n-->
+    <!--</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+    <!--<appender name="STDOUT_SIT" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!--<encoder>-->
+    <!--<pattern>sit - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n-->
+    <!--</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+    <!--<appender name="STDOUT_PROD" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!--<encoder>-->
+    <!--<pattern>prod - %d{HH:mm:ss.SSS} [%X{X-B3-TraceId:-} %X{X-B3-SpanId:-}] [%thread] %-5level %logger{36} - %msg%n-->
+    <!--</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+</configuration>

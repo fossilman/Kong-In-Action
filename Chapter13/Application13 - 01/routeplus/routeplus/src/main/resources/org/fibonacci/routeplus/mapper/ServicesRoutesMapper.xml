@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.routeplus.mapper.ServicesRoutesMapper">
+  <resultMap id="BaseResultMap" type="org.fibonacci.routeplus.domain.ServicesRoutes">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
+    <result column="route_type" jdbcType="CHAR" property="routeType" />
+    <result column="inner_path" jdbcType="VARCHAR" property="innerPath" />
+    <result column="out_path" jdbcType="VARCHAR" property="outPath" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="kong_routes_id" jdbcType="VARCHAR" property="kongRoutesId" />
+    <result column="kong_routes_name" jdbcType="VARCHAR" property="kongRoutesName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, service_id, route_type, inner_path, out_path, enabled, kong_routes_id, kong_routes_name,
+    remark, create_by, update_by, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from services_routes
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from services_routes
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.fibonacci.routeplus.domain.ServicesRoutes">
+    insert into services_routes (id, service_id, route_type,
+      inner_path, out_path, enabled,
+      kong_routes_id, kong_routes_name, remark,
+      create_by, update_by, create_time,
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{routeType,jdbcType=CHAR},
+      #{innerPath,jdbcType=VARCHAR}, #{outPath,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT},
+      #{kongRoutesId,jdbcType=VARCHAR}, #{kongRoutesName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.fibonacci.routeplus.domain.ServicesRoutes" useGeneratedKeys="true" keyProperty="id">
+    insert into services_routes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="routeType != null">
+        route_type,
+      </if>
+      <if test="innerPath != null">
+        inner_path,
+      </if>
+      <if test="outPath != null">
+        out_path,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="kongRoutesId != null">
+        kong_routes_id,
+      </if>
+      <if test="kongRoutesName != null">
+        kong_routes_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="routeType != null">
+        #{routeType,jdbcType=CHAR},
+      </if>
+      <if test="innerPath != null">
+        #{innerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="outPath != null">
+        #{outPath,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="kongRoutesId != null">
+        #{kongRoutesId,jdbcType=VARCHAR},
+      </if>
+      <if test="kongRoutesName != null">
+        #{kongRoutesName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.routeplus.domain.ServicesRoutes">
+    update services_routes
+    <set>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="routeType != null">
+        route_type = #{routeType,jdbcType=CHAR},
+      </if>
+      <if test="innerPath != null">
+        inner_path = #{innerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="outPath != null">
+        out_path = #{outPath,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="kongRoutesId != null">
+        kong_routes_id = #{kongRoutesId,jdbcType=VARCHAR},
+      </if>
+      <if test="kongRoutesName != null">
+        kong_routes_name = #{kongRoutesName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.fibonacci.routeplus.domain.ServicesRoutes">
+    update services_routes
+    set service_id = #{serviceId,jdbcType=INTEGER},
+      route_type = #{routeType,jdbcType=CHAR},
+      inner_path = #{innerPath,jdbcType=VARCHAR},
+      out_path = #{outPath,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      kong_routes_id = #{kongRoutesId,jdbcType=VARCHAR},
+      kong_routes_name = #{kongRoutesName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByServiceIdArrays" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from services_routes
+    where service_id in
+    <foreach collection="list" index="index" item="id"
+             open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    order by create_time desc
+  </select>
+
+  <delete id="deleteByServiceId" parameterType="java.lang.Integer">
+    delete from services_routes
+    where service_id = #{serviceId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="batchdeleteByIds" parameterType="java.util.List">
+    delete from services_routes
+    where id in
+    <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="selectByServiceIdAndType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from services_routes
+    where service_id = #{serviceId,jdbcType=INTEGER} and route_type = #{type,jdbcType=CHAR}
+    limit 1
+  </select>
+
+  <select id="selectByServiceIdAndPath" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from services_routes
+    where service_id = #{serviceId,jdbcType=INTEGER} and out_path = #{outPath,jdbcType=CHAR}
+    limit 1
+  </select>
+</mapper>

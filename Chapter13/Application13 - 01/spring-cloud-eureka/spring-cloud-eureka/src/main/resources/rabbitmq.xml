@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:luojinrabbit="http://www.luojin.com/schema/luojinrabbit"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.luojin.com/schema/luojinrabbit
+      http://www.luojin.com/schema/luojinrabbit/luojin-rabbit.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <luojinrabbit:queue name="spring-cloud-eureka.queue.test_mq"/>
+
+    <rabbit:fanout-exchange name="spring-cloud-eureka.exchange.test_mq">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring-cloud-eureka.queue.test_mq"/>
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <!--  requeue-rejected="false" 这个参数必须加！！！！-->
+    <luojinrabbit:listener-container connection-factory="connectionFactory" concurrency="3" prefetch="5" message-converter="jsonConverter" requeue-rejected="false">
+        <luojinrabbit:listener ref="demoConsumer" queues="spring-cloud-eureka.queue.test_mq" method="receiveMsg"/>
+    </luojinrabbit:listener-container>
+
+</beans>

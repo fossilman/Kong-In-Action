@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.routeplus.mapper.ApplicationServicesMapper">
+  <resultMap id="BaseResultMap" type="org.fibonacci.routeplus.domain.ApplicationServices">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="application_id" jdbcType="INTEGER" property="applicationId" />
+    <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="kong_services_id" jdbcType="VARCHAR" property="kongServicesId" />
+    <result column="kong_services_name" jdbcType="VARCHAR" property="kongServicesName" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, application_id, application_name, path, enabled, remark, kong_services_id, kong_services_name,
+    create_by, update_by, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from application_services
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from application_services
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.fibonacci.routeplus.domain.ApplicationServices">
+    insert into application_services (id, application_id, application_name,
+      path, enabled, remark,
+      kong_services_id, kong_services_name, create_by,
+      update_by, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{applicationId,jdbcType=INTEGER}, #{applicationName,jdbcType=VARCHAR},
+      #{path,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{remark,jdbcType=VARCHAR},
+      #{kongServicesId,jdbcType=VARCHAR}, #{kongServicesName,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+      #{updateBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.fibonacci.routeplus.domain.ApplicationServices" useGeneratedKeys="true" keyProperty="id">
+    insert into application_services
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="applicationId != null">
+        application_id,
+      </if>
+      <if test="applicationName != null">
+        application_name,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="kongServicesId != null">
+        kong_services_id,
+      </if>
+      <if test="kongServicesName != null">
+        kong_services_name,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicationId != null">
+        #{applicationId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationName != null">
+        #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="kongServicesId != null">
+        #{kongServicesId,jdbcType=VARCHAR},
+      </if>
+      <if test="kongServicesName != null">
+        #{kongServicesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.routeplus.domain.ApplicationServices">
+    update application_services
+    <set>
+      <if test="applicationId != null">
+        application_id = #{applicationId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationName != null">
+        application_name = #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="kongServicesId != null">
+        kong_services_id = #{kongServicesId,jdbcType=VARCHAR},
+      </if>
+      <if test="kongServicesName != null">
+        kong_services_name = #{kongServicesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.fibonacci.routeplus.domain.ApplicationServices">
+    update application_services
+    set application_id = #{applicationId,jdbcType=INTEGER},
+      application_name = #{applicationName,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR},
+      kong_services_id = #{kongServicesId,jdbcType=VARCHAR},
+      kong_services_name = #{kongServicesName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByApplicationId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from application_services
+    where application_id = #{applicationId,jdbcType=INTEGER}
+    order by create_time
+  </select>
+  <select id="selectByApplicationIdAndPath" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from application_services
+    where application_id = #{applicationId,jdbcType=INTEGER} and path= #{path,jdbcType=VARCHAR}
+    limit 1
+  </select>
+</mapper>

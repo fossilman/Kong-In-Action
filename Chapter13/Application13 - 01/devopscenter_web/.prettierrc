@@ -1,0 +1,9 @@
+{
+  "printWidth": 300,
+  "trailingComma": "none", // 最后一个对象元素加逗号
+  "semi": true, // 句末加分号
+  "proseWrap": "preserve", // 是否要换行
+  "bracketSpacing": true, // 对象，数组加空格
+  "singleQuote": true, // 用单引号
+  "arrowParens": "avoid"
+}

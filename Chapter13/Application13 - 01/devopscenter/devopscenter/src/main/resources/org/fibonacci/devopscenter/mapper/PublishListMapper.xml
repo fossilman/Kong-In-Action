@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.devopscenter.mapper.PublishListMapper">
+  <resultMap id="BaseResultMap" type="org.fibonacci.devopscenter.domain.PublishList">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gitlab_id" jdbcType="INTEGER" property="gitlabId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="del" jdbcType="INTEGER" property="del" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="kind" jdbcType="VARCHAR" property="kind" />
+    <result column="route_type" jdbcType="VARCHAR" property="routeType" />
+    <result column="groups" jdbcType="VARCHAR" property="groups" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, gitlab_id,num,remark,del,groups,route_type,kind, create_time, remark,update_time,type,create_by
+  </sql>
+  <sql id="listByPublish">
+     id, name, gitlab_id,num,remark,groups, kind,route_type,del,remark,create_time,type,create_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="listByPublish" />
+    from pb_list
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pb_list
+    where id = #{id,jdbcType=BIGINT} and del=1
+  </delete>
+  <insert id="insert" parameterType="org.fibonacci.devopscenter.domain.PublishList" useGeneratedKeys="true" keyProperty="id">
+    insert into pb_list (id, name, num, remark,gitlab_id,
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
+       #{remark,jdbcType=VARCHAR},#{gitlab_id,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.fibonacci.devopscenter.domain.PublishList" useGeneratedKeys="true" keyProperty="id">
+    insert into pb_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gitlabId != null">
+        gitlab_id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="groups != null">
+        groups,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="kind != null">
+        kind,
+      </if>
+      <if test="routeType != null">
+        route_type,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gitlabId != null">
+        #{gitlabId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="groups != null">
+        #{groups,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null">
+        #{routeType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.devopscenter.domain.PublishList">
+    update pb_list
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null">
+        route_type= #{routeType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.fibonacci.devopscenter.domain.PublishList">
+    update pb_list
+    set name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      gitlab_id = #{gitlabId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      del = #{del,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listByPublish" parameterType="model.bo.PublishBo" resultMap="BaseResultMap">
+    select
+    <include refid="listByPublish" />
+    from pb_list
+    where 1=1
+    <if test="groupNameList != null">
+     and
+    <foreach collection="groupNameList"  item="item" separator="or">
+      groups like CONCAT('%','${item}','%')
+    </foreach>
+    </if>
+    order by name
+  </select>
+</mapper>

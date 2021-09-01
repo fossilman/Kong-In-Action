@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.devopscenter.mapper.ListDeployMapper">
+  <resultMap id="BaseResultMap" type="org.fibonacci.devopscenter.domain.ListDeploy">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="list_id" jdbcType="BIGINT" property="listId" />
+    <result column="build_id" jdbcType="INTEGER" property="buildId" />
+    <result column="list_name" jdbcType="VARCHAR" property="listName" />
+    <result column="gitlab_version" jdbcType="VARCHAR" property="gitlabVersion" />
+    <result column="before_gitlab_version" jdbcType="VARCHAR" property="beforeGitlabVersion" />
+    <result column="vagrancy" jdbcType="INTEGER" property="vagrancy" />
+    <result column="before_vagrancy" jdbcType="INTEGER" property="beforeVagrancy" />
+    <result column="publish_type" jdbcType="VARCHAR" property="publishType" />
+    <result column="publish_status" jdbcType="VARCHAR" property="publishStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="looping" jdbcType="INTEGER" property="looping" />
+    <result column="fail_reason" jdbcType="VARCHAR" property="failReason" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, list_id, build_id, list_name, gitlab_version, before_gitlab_version, vagrancy,
+    before_vagrancy, publish_type, publish_status, create_time, update_time, create_by,
+    update_by,looping,fail_reason
+  </sql>
+  <sql id="yh_Column_List">
+    id, build_id,list_name,gitlab_version, before_gitlab_version, vagrancy,
+    publish_type, publish_status, create_time, create_by,looping,fail_reason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pb_list_deploy
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="yh_Column_List" />
+    from pb_list_deploy
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectBylistid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="yh_Column_List" />
+    from pb_list_deploy
+    where list_id =#{listid}
+    <if test="id != null">
+      and id &lt; #{id}
+    </if>
+     order by create_time desc
+  </select>
+
+  <select id="selectBylistidforLaster" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="yh_Column_List" />
+    from pb_list_deploy
+    where list_id =#{listid}
+    order by create_time desc limit 1
+  </select>
+
+  <select id="selectBylistIdArray" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pb_list_deploy
+    where list_id in
+    <foreach collection="listidList" index="index" item="listid"
+             open="(" separator="," close=")">
+      #{listid}
+    </foreach>
+    order by create_time desc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pb_list_deploy
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.fibonacci.devopscenter.domain.ListDeploy">
+    insert into pb_list_deploy (id, list_id, build_id,
+      list_name, gitlab_version, before_gitlab_version,
+      vagrancy, before_vagrancy, publish_type,
+      publish_status, create_time, update_time,
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{listId,jdbcType=BIGINT}, #{buildId,jdbcType=INTEGER},
+      #{listName,jdbcType=VARCHAR}, #{gitlabVersion,jdbcType=VARCHAR}, #{beforeGitlabVersion,jdbcType=VARCHAR},
+      #{vagrancy,jdbcType=INTEGER}, #{beforeVagrancy,jdbcType=INTEGER}, #{publishType,jdbcType=VARCHAR},
+      #{publishStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.fibonacci.devopscenter.domain.ListDeploy" useGeneratedKeys="true" keyProperty="id">
+    insert into pb_list_deploy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="listId != null">
+        list_id,
+      </if>
+      <if test="buildId != null">
+        build_id,
+      </if>
+      <if test="listName != null">
+        list_name,
+      </if>
+      <if test="gitlabVersion != null">
+        gitlab_version,
+      </if>
+      <if test="beforeGitlabVersion != null">
+        before_gitlab_version,
+      </if>
+      <if test="vagrancy != null">
+        vagrancy,
+      </if>
+      <if test="beforeVagrancy != null">
+        before_vagrancy,
+      </if>
+      <if test="publishType != null">
+        publish_type,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="looping != null">
+        looping,
+      </if>
+      <if test="failReason != null">
+        fail_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="listId != null">
+        #{listId,jdbcType=BIGINT},
+      </if>
+      <if test="buildId != null">
+        #{buildId,jdbcType=INTEGER},
+      </if>
+      <if test="listName != null">
+        #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="gitlabVersion != null">
+        #{gitlabVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeGitlabVersion != null">
+        #{beforeGitlabVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="vagrancy != null">
+        #{vagrancy,jdbcType=INTEGER},
+      </if>
+      <if test="beforeVagrancy != null">
+        #{beforeVagrancy,jdbcType=INTEGER},
+      </if>
+      <if test="publishType != null">
+        #{publishType,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="looping != null">
+        #{looping,jdbcType=INTEGER},
+      </if>
+      <if test="failReason != null">
+        #{failReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.devopscenter.domain.ListDeploy">
+    update pb_list_deploy
+    <set>
+      <if test="listId != null">
+        list_id = #{listId,jdbcType=BIGINT},
+      </if>
+      <if test="buildId != null">
+        build_id = #{buildId,jdbcType=INTEGER},
+      </if>
+      <if test="listName != null">
+        list_name = #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="gitlabVersion != null">
+        gitlab_version = #{gitlabVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeGitlabVersion != null">
+        before_gitlab_version = #{beforeGitlabVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="vagrancy != null">
+        vagrancy = #{vagrancy,jdbcType=INTEGER},
+      </if>
+      <if test="beforeVagrancy != null">
+        before_vagrancy = #{beforeVagrancy,jdbcType=INTEGER},
+      </if>
+      <if test="publishType != null">
+        publish_type = #{publishType,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="looping != null">
+        looping = #{looping,jdbcType=INTEGER},
+      </if>
+      <if test="failReason != null">
+        fail_reason = #{failReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.fibonacci.devopscenter.domain.ListDeploy">
+    update pb_list_deploy
+    set list_id = #{listId,jdbcType=BIGINT},
+      build_id = #{buildId,jdbcType=INTEGER},
+      list_name = #{listName,jdbcType=VARCHAR},
+      gitlab_version = #{gitlabVersion,jdbcType=VARCHAR},
+      before_gitlab_version = #{beforeGitlabVersion,jdbcType=VARCHAR},
+      vagrancy = #{vagrancy,jdbcType=INTEGER},
+      before_vagrancy = #{beforeVagrancy,jdbcType=INTEGER},
+      publish_type = #{publishType,jdbcType=VARCHAR},
+      publish_status = #{publishStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pb_list_deploy
+    where publish_status ='ING'
+  </select>
+
+  <select id="selectByPublishStatus" resultType="java.lang.Long">
+    select
+    id
+    from pb_list_deploy
+    where publish_status ='ING' and looping &lt; 6;
+  </select>
+
+  <select id="selectByDeployId" resultType="java.lang.Long">
+    select
+    id
+    from pb_list_deploy where list_id =#{listid}
+  </select>
+
+  <delete id="deleteByListid" parameterType="java.lang.Long">
+    delete from pb_list_deploy
+    where list_id = #{listid,jdbcType=BIGINT}
+  </delete>
+
+
+  <!--<insert id="batchInsert" parameterType="map">
+    insert into pb_list_deploy (id, list_id, build_id,
+    list_name, gitlab_version, before_gitlab_version,
+    vagrancy, before_vagrancy, publish_type,
+    publish_status, create_time, update_time,
+    create_by, update_by)
+    values
+
+    <foreach collection="iplist" item="ip" separator=",">
+      (#{id,jdbcType=BIGINT}, #{d1.listId,jdbcType=BIGINT}, #{d1.listName,jdbcType=VARCHAR},
+      #{ip.ip,jdbcType=VARCHAR},#{ip.port,jdbcType=VARCHAR}, NOW(), NOW())
+    </foreach>
+  </insert>-->
+
+</mapper>

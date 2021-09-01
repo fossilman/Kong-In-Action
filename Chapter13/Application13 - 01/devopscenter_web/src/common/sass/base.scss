@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+@import "variable";
+@import "function";
+
+// 顶部右侧显示
+@import './top.scss';
+// icon
+@import './icon.scss';
+//通用配置
+@import './normalize.scss';
+// 侧面导航栏
+@import './sidebar.scss';
+//适配
+@import './media.scss';
+// ele样式覆盖
+@import './element-ui.scss';
+
+body,
+html {
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
+html {}
+
+body {}
+
+#app {
+  margin: 0 auto;
+}
+
+a {
+  color: #000;
+}
+
+.message-default {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  min-width: 50px;
+  padding: 12px 15px;
+  .el-message__icon {
+    display: none;
+  }
+  .el-message__content {
+    color: #fff;
+  }
+}
+
+.over-drawer .el-drawer{
+  overflow: auto;
+}
+
+html,
+body {
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+.el-input__inner {
+  // 解决safair浏览器光标错位问题
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    line-height: 20px;
+  }
+}
+.el-tooltip__popper{
+  max-width: 500px;
+}
+
+

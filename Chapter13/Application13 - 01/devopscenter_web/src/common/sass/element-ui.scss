@@ -1,0 +1,138 @@
+.el-dropdown-menu__item {
+    font-size: 12px !important;
+    line-height: 28px !important;
+}
+.el-card.is-always-shadow {
+    box-shadow: none;
+    border: none !important;
+}
+
+.el-scrollbar__view {
+    height: 100%;
+}
+
+.el-menu--horizontal {
+    border-bottom: none !important;
+}
+
+.el-menu {
+    border-right: none !important;
+}
+
+.el-menu--display,
+.el-menu--display+.el-submenu__icon-arrow {
+    display: none;
+}
+
+
+
+.el-message__icon,
+.el-message__content {
+    display: inline-block;
+}
+
+.el-date-editor .el-range-input,
+.el-date-editor .el-range-separator {
+    height: auto;
+    overflow: hidden;
+}
+
+.el-dialog__wrapper {
+    z-index: 2048;
+}
+
+
+.el-col {
+    margin-bottom: 8px;
+}
+
+.el-main {
+    padding: 0 !important;
+}
+.el-dropdown-menu__item--divided:before, .el-menu, .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus, .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover, .el-menu--horizontal>.el-submenu .el-submenu__title:hover {
+    background-color:transparent;
+}
+
+
+.el-dropdown-menu__item--divided:before, .el-menu, .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus, .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover, .el-menu--horizontal>.el-submenu .el-submenu__title:hover{
+    background-color: transparent !important;
+}
+
+.el-button [class*=el-icon-]+span {
+    margin-left: 5px;
+}
+
+.el-button span{
+    font-weight: 500;
+}
+
+.el-slider__runway.disabled .el-slider__bar {
+    background-color: #409eff;
+}
+.el-slider__runway.disabled .el-slider__button {
+    background-color: #409eff;
+}
+.el-slider__runway.disabled .el-slider__button {
+    border-color: #409eff;
+}
+.el-slider__button-wrapper {
+    outline: none;
+}
+
+.el-table--enable-row-transition .el-table__body td {
+    padding: 7px 0!important;
+}
+
+.icon-status{
+    vertical-align: middle;
+    margin-left: 10px;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    border-radius:50%;
+    display: inline-block;
+}
+
+.icon-status-enter{
+    background-image: url('../../assets/lamp-ico.svg');
+}
+.icon-status-close{
+    background-image: url('../../assets/lamp-close-ico.svg');
+}
+.icon-status-no{
+    background-image: url('../../assets/lamp-no-ico.svg');
+}
+
+.icon-status-loading {
+    background-image: url('../../assets/lamp-loading-ico.svg');
+    animation: lampLoading 1.4s infinite;
+}
+
+.icon-status {
+    vertical-align: top;
+    margin-left: 10px;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pagination{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.el-hand{
+    cursor:pointer;
+}
+
+.el-table__body tr.hover-row.current-row>td,.el-table__body tr.hover-row.el-table__row--striped.current-row>td,.el-table__body tr.hover-row.el-table__row--striped>td,.el-table__body tr.hover-row>td {
+    background-color:#e1e7f0!important;
+}
+
+.el-drawer__body{
+    overflow-y: auto;
+}

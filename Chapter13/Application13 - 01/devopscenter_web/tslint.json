@@ -1,0 +1,112 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  },
+  "rules": {
+    "no-sparse-arrays": true,
+    "no-tautology-expression": true,
+    "no-duplicate-switch-case": true,
+    "no-unnecessary-callback-wrapper": true,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "require-const-for-all-caps",
+        "allow-snake-case"
+      ]
+    },
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "unnecessary-bind": true,
+    // "file-name-casing": [true, {
+    //   ".vue": "pascal-case",
+    //   ".ts": "camel-case",
+    //   ".js": "camel-case",
+    //   ".scss": "snake-case",
+    //   ".less": "snake-case",
+    //   ".css": "snake-case"
+    // }],
+    "no-shadowed-variable": [
+      true,
+      {
+        "class": true,
+        "enum": true,
+        "function": true,
+        "interface": false,
+        "namespace": true,
+        "typeAlias": false,
+        "typeParameter": false,
+        "underscore": false
+      }
+    ],
+    // "strict-boolean-expressions": [
+    //   true,
+    //   "allow-null-union",
+    //   "allow-undefined-union",
+    //   "allow-string",
+    //   "allow-enum",
+    //   "allow-number"
+    // ],
+    "max-line-length": [false],
+    "use-isnan": true,
+    // "strict-type-predicates": true,
+    "no-this-assignment": [true, {
+      "allow-destructuring": true
+    }],
+    "unnecessary-constructor": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "encoding": true,
+    "no-duplicate-imports": true,
+    "no-empty": [true, "allow-empty-catch"],
+    "no-invalid-template-strings": true,
+    "no-duplicate-super": true,
+    "await-promise": true,
+    "no-conditional-assignment": true,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "no-arg": true,
+    "typedef": [
+      true,
+      "call-signature",
+      // "arrow-call-signature",
+      "parameter",
+      // "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
+    "no-empty-interface": true,
+    "no-bitwise": true,
+    "quotemark": false,
+    "eofline": true,
+    "no-console": false,
+    "indent": [true, "spaces", 2],
+    "interface-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-consecutive-blank-lines": false,
+    "triple-equals": true,
+    "curly": [true, "ignore-same-line"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "radix": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "never",
+          "arrays": "never",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ]
+  }
+}

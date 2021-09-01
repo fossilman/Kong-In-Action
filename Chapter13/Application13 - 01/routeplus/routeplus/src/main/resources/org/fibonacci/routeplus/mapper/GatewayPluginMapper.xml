@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fibonacci.routeplus.mapper.GatewayPluginMapper">
+  <resultMap id="BaseResultMap" type="org.fibonacci.routeplus.domain.GatewayPlugin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="application_id" jdbcType="INTEGER" property="applicationId" />
+    <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="plugin_id" jdbcType="INTEGER" property="pluginId" />
+    <result column="plugin_name" jdbcType="VARCHAR" property="pluginName" />
+    <result column="plugin_config" jdbcType="VARCHAR" property="pluginConfig" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,application_id,application_name, name, type, plugin_id, plugin_name, plugin_config,enabled, create_time, update_time
+  </sql>
+  <sql id="Simple_Column_List">
+    id, application_id,application_name,name, type, plugin_id, plugin_name, plugin_config,enabled
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Simple_Column_List" />
+    from gateway_plugin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gateway_plugin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.fibonacci.routeplus.domain.GatewayPlugin">
+    insert into gateway_plugin (id, name, type, plugin_id,
+      plugin_name, plugin_config, create_time,
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{pluginId,jdbcType=INTEGER},
+      #{pluginName,jdbcType=VARCHAR}, #{pluginConfig,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.fibonacci.routeplus.domain.GatewayPlugin" useGeneratedKeys="true" keyProperty="id">
+    insert into gateway_plugin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="applicationId != null">
+        application_id,
+      </if>
+      <if test="applicationName != null">
+        application_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="pluginId != null">
+        plugin_id,
+      </if>
+      <if test="pluginName != null">
+        plugin_name,
+      </if>
+      <if test="pluginConfig != null">
+        plugin_config,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicationId != null">
+        #{applicationId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationName != null">
+        #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="pluginId != null">
+        #{pluginId,jdbcType=INTEGER},
+      </if>
+      <if test="pluginName != null">
+        #{pluginName,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginConfig != null">
+        #{pluginConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.fibonacci.routeplus.domain.GatewayPlugin">
+    update gateway_plugin
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="pluginId != null">
+        plugin_id = #{pluginId,jdbcType=INTEGER},
+      </if>
+      <if test="pluginName != null">
+        plugin_name = #{pluginName,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginConfig != null">
+        plugin_config = #{pluginConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.fibonacci.routeplus.domain.GatewayPlugin">
+    update gateway_plugin
+    set name = #{name,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      plugin_id = #{pluginId,jdbcType=INTEGER},
+      plugin_name = #{pluginName,jdbcType=VARCHAR},
+      plugin_config = #{pluginConfig,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="listGatewayPlugin" resultMap="BaseResultMap">
+    select
+    <include refid="Simple_Column_List" />
+    from gateway_plugin where application_id=#{applicationId,jdbcType=INTEGER}
+    order by create_time
+  </select>
+  <select id="selectByApplicationId" resultMap="BaseResultMap">
+    select
+    <include refid="Simple_Column_List" />
+    from gateway_plugin
+    where application_id=#{applicationId,jdbcType=INTEGER}
+    and type = #{type,jdbcType=CHAR} and plugin_id = #{pluginId,jdbcType=INTEGER}
+  </select>
+</mapper>

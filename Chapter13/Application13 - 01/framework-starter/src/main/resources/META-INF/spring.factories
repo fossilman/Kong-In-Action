@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.fibonacci.framework.autoconfigure.FrameworkAutoConfiguration,\
+  org.fibonacci.mybatis.starter.autoconfigure.DatabaseAutoConfiguration
