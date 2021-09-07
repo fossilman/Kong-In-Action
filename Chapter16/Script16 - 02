@@ -1,0 +1,10 @@
+db.list.insert({
+  type:'cat',
+  name:'Alice',
+  age:3
+});
+db.list.insert({
+  type:'dog',
+  name:'Ben',
+  age:5
+});

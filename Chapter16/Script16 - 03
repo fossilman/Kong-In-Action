@@ -1,0 +1,4 @@
+$ mkdir <your project folder name>
+$ cd <your project folder name>
+$ npm init
+$ npm install express

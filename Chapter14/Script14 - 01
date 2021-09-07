@@ -44,7 +44,7 @@ spec:
       # 启动容器时加载的镜像和启动端口
       containers:
       - name: node
-        image: kong-in-action:latest
+        image: konginaction/node:latest
         ports:
         - containerPort: 8080
         # 容器CPU限制
