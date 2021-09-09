@@ -461,6 +461,7 @@ public class PublishService {
         String status = PublishConstants.BUILD_STATUS.ING.name();
         String harborUrl = StringUtils.replace(jenkinsHelper.harborUrl, "@project", publishList.getName()).
                 replace("@env", os).replace("@harbokey", listBuild.getHarborKey());
+        log.info("harborUrl {}", harborUrl);
         try {
             //harbor parma combo
             String name = jenkinsHelper.harborUser;

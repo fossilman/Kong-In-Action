@@ -32,7 +32,7 @@ public class HarborService {
         StringBuilder pullRequest = new StringBuilder();
         pullRequest.append("http://").append(containerIp).append(":").append(containerPort)
                 .append("/images/create?fromImage=").append(imageName)
-                .append("&tage=").append(imageTag)
+                .append("&tag=").append(imageTag)
                 .append("&fromSrc=").append(harborAddress);
         //拉取镜像
         httpClientTemplate.doPost(pullRequest.toString(), null);
