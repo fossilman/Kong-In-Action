@@ -92,7 +92,7 @@ public class PublishAsync {
     @Async("taskExecutor")
     public void pullImages(String url, String[] params,String name,String remark){
         try {
-            String pullUrl = "http://" +url + ":4789/images/create?fromImage=" + params[0] + "&tage=" + params[1] + "&fromSrc=" + "https://harbor.loopin.group/";
+            String pullUrl = "http://" +url + ":4789/images/create?fromImage=" + params[0] + "&tage=" + params[1] + "&fromSrc=" + "http://harbor.maxcute.cn/";
             //拉取镜像
             httpClientTemplate.doPost(pullUrl, (Object) null);
             String verifyPullUrl ="http://"+ url + ":4789/images/json";
