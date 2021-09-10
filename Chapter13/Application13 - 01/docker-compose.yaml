@@ -35,17 +35,16 @@ services:
       DB_HOST: mysql:3306
       DB_NAME: root
       DB_PASSWORD: 123456
-      # 此GITLAB地址为本地地址，用户可修改为自建GITLAB或者已有的GITLAB即可
-      GITLAB_URL: http://47.103.107.95/
+      # 此GITLAB地址为本地地址,用户可修改为自建GITLAB或者已有的GITLAB即可
+      GITLAB_URL: http://127.0.0.1/
       GITLAB_TOKEN: "Xd6XwfVuRfJzyRxohNWD"
       KONG_URL: http://kong:8001
-      # 此JENKINS地址为本地地址，用户可修改为自建JENKINS或者已有的JENKINS即可
-      # JENKINS_URL: http://admin:11af3f046fef2cde66c4f2322f7e5e9612@106.14.248.21:8080
-      JENKINS_URL: http://admin:1165df4bc0e62642b0b34173d51babc0b6@jenkins.maxcute.cn:8080
+      # 此JENKINS地址为本地地址,用户可修改为自建JENKINS或者已有的JENKINS即可,其中 1165df4bc0e62642b0b34173d51babc0b6 为JENKINS API Token
+      JENKINS_URL: http://admin:1165df4bc0e62642b0b34173d51babc0b6@127.0.0.1:8080
       JENKINS_USERNAME: admin
       JENKINS_PASSWORD: "211213015"
-      # 为了演示该项目，此Harbor地址为官网Demo仓库，用户可修改为自建Harbor即可
-      HARBOR_ADDRESS: harbor.maxcute.cn
+      # 此HARBOR地址为本地地址,用户可修改为自建HARBOR或者已有的HARBOR即可
+      HARBOR_ADDRESS: 127.0.0.1
       HARBOR_USERNAME: admin
       HARBOR_PASSWORD: "Harbor12345"
       JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"

@@ -4,69 +4,13 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const devServer = {
     host: '0.0.0.0',
     proxy: {
-        // 权限
-        '^/inneruser': {
-            target: 'http://172.19.21.245:8080',
-            // target: 'http://192.168.5.20:8080',
-            changeOrigin: true,
-            // pxathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
-        '^/publish': {
-            // target: 'http://172.0.10.80:8080',
-            target: 'http://172.19.22.2:8080',
-            changeOrigin: true,
-            // pxathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
         '^/devopscenter': {
-            // target: 'http://172.0.10.80:8080',
-            target: 'http://devopscenter.dev.whalepms.com:8080',
+            target: 'http://127.0.0.1:8080',
             changeOrigin: true,
-            // pxathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
-        '^/confplus': {
-            //target: 'http://192.168.81.172:8080',
-            target: 'http://confplus.dev.whalepms.com:8080',
-            changeOrigin: true,
-            // pathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
-        '^/schedulerplus': {
-            //target: 'http://172.19.21.242:8080',
-            target: 'http://schedulerplus.dev.whalepms.com:8080',
-            changeOrigin: true,
-            // pathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
-        '^/mockplus': {
-            target: 'http://172.19.22.12:8080',
-            // target: 'http://192.168.5.195:18080',
-            changeOrigin: true,
-            // pathRewrite: {
-            //     '^/public': 'public'
-            // }
-        },
-        '^/rabbitmqplus': {
-            // target: 'http://172.19.22.69:8080',
-            target: 'http://rabbitmqplus.dev.whalepms.com:8080',
-            changeOrigin: true,
-            // pathRewrite: {
-            //     '^/public': 'public'
-            // }
         },
         '^/routeplus': {
-            target: 'http://172.19.22.89:8080',
+            target: 'http://127.0.0.1:8081',
             changeOrigin: true,
-            // pathRewrite: {
-            //     '^/public': 'public'
-            // }
         },
     },
 }
