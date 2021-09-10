@@ -25,9 +25,6 @@ services:
     depends_on:
       - eureka
       - mysql
-      - gitlab
-      - jenkins
-      # - harbor
     image: konginaction/devopscenter:latest
     container_name: konginaction_devopscenter
     restart: always
@@ -38,16 +35,19 @@ services:
       DB_HOST: mysql:3306
       DB_NAME: root
       DB_PASSWORD: 123456
-      GITLAB_URL: gitlab
-      GITLAB_TOKEN: "xxxxxxxxxx"
+      # 此GITLAB地址为本地地址，用户可修改为自建GITLAB或者已有的GITLAB即可
+      GITLAB_URL: http://47.103.107.95/
+      GITLAB_TOKEN: "Xd6XwfVuRfJzyRxohNWD"
       KONG_URL: http://kong:8001
-      JENKINS_URL: jenkins
+      # 此JENKINS地址为本地地址，用户可修改为自建JENKINS或者已有的JENKINS即可
+      # JENKINS_URL: http://admin:11af3f046fef2cde66c4f2322f7e5e9612@106.14.248.21:8080
+      JENKINS_URL: http://admin:1165df4bc0e62642b0b34173d51babc0b6@jenkins.maxcute.cn:8080
       JENKINS_USERNAME: admin
-      JENKINS_PASSWORD: admin123
+      JENKINS_PASSWORD: "211213015"
       # 为了演示该项目，此Harbor地址为官网Demo仓库，用户可修改为自建Harbor即可
-      HARBOR_URL: https://demo.goharbor.io/
-      HARBOR_USERNAME: konginaction
-      HARBOR_PASSWORD: 1qaz@WSX
+      HARBOR_ADDRESS: harbor.maxcute.cn
+      HARBOR_USERNAME: admin
+      HARBOR_PASSWORD: "Harbor12345"
       JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"
     networks:
       konginaction_network:
@@ -67,7 +67,7 @@ services:
       DB_HOST: mysql:3306
       DB_NAME: root
       DB_PASSWORD: 123456
-      KONG_URL: kong:8001
+      KONG_URL: http://kong:8001
       JVM_OPTION: "-Xmx1024m -Xms1024m -Xmn512m -Xss512k"
     networks:
       konginaction_network:
@@ -122,22 +122,6 @@ services:
     networks:
       konginaction_network:
         ipv4_address: 192.168.100.16
-  gitlab:
-    image: gitlab/gitlab-ce
-    container_name: konginaction_gitlab
-    ports:
-      - '88:80'
-    networks:
-      konginaction_network:
-        ipv4_address: 192.168.100.17
-  jenkins:
-    image: jenkinsci/blueocean
-    container_name: konginaction_jenkins
-    ports:
-      - '8888:8080'
-    networks:
-      konginaction_network:
-        ipv4_address: 192.168.100.18
   initialization:
     depends_on: 
       - kong
@@ -149,7 +133,7 @@ services:
         condition: on-failure
     networks:
       konginaction_network:
-        ipv4_address: 192.168.100.20
+        ipv4_address: 192.168.100.17
 networks:
   konginaction_network:
     ipam:
