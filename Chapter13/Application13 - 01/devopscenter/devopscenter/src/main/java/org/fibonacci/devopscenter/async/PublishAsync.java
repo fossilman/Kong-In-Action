@@ -2,11 +2,6 @@ package org.fibonacci.devopscenter.async;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import model.bo.PublishBo;
 import model.bo.ServerBo;
@@ -16,9 +11,15 @@ import org.fibonacci.framework.global.AppInfo;
 import org.fibonacci.framework.httpclient.HttpClientTemplate;
 import org.fibonacci.routeplus.common.bo.RoutePlusBo;
 import org.fibonacci.routeplus.rpc.feign.RouteFeignClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * @author krame
@@ -37,6 +38,9 @@ public class PublishAsync {
 
     @Resource
     private AppInfo appInfo;
+
+    @Value("${harbor.address}")
+    private String harborAddress;
 
     /**
      * 异步处理kong逻辑
@@ -92,7 +96,7 @@ public class PublishAsync {
     @Async("taskExecutor")
     public void pullImages(String url, String[] params,String name,String remark){
         try {
-            String pullUrl = "http://" +url + ":4789/images/create?fromImage=" + params[0] + "&tag=" + params[1] + "&fromSrc=" + "https://harbor.loopin.group/";
+            String pullUrl = "http://" +url + ":4789/images/create?fromImage=" + params[0] + "&tag=" + params[1] + "&fromSrc=http://" + harborAddress;
             //拉取镜像
             httpClientTemplate.doPost(pullUrl, (Object) null);
             String verifyPullUrl ="http://"+ url + ":4789/images/json";

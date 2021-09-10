@@ -56,7 +56,7 @@ public class CheckPublishHealthJob implements InitializingBean {
             while (shutdown) {
                 synchronized (this) {
                     try {
-                        wait(10000L + 30 * RandomUtils.nextInt(0, 100));
+                        wait(1000L + 30 * RandomUtils.nextInt(0, 100));
                         execute();
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
